@@ -1,0 +1,45 @@
+import sqlite3
+
+DATABASE = "agritrial.db"
+
+
+def create_database():
+    connection = sqlite3.connect(DATABASE)
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS trial_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            site TEXT NOT NULL,
+            trial_date TEXT NOT NULL,
+            crop TEXT NOT NULL,
+            treatment_group TEXT NOT NULL,
+            observer TEXT NOT NULL,
+
+            plant_height REAL,
+            leaf_count INTEGER,
+            fresh_weight REAL,
+            dry_weight REAL,
+            chlorophyll REAL,
+            root_length REAL,
+            yield REAL,
+
+            ph REAL,
+            ec REAL,
+            dissolved_oxygen REAL,
+            temperature REAL,
+            humidity REAL,
+            nitrate REAL,
+            phosphate REAL
+        )
+    """)
+
+    connection.commit()
+    connection.close()
+
+
+if __name__ == "__main__":
+    create_database()
+    print("Database created successfully.")
+    
